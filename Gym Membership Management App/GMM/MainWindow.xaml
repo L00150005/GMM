@@ -5,8 +5,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GMM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="MainWindow" Height="450" Width="800" MaxWidth="450" MaxHeight="300" MinWidth="450" MinHeight="300">
         
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+  
+        </Grid.ColumnDefinitions>
+
+        <Label Name="lblTitle" 
+               Grid.Column="0"
+               Grid.Row="0"
+               Grid.ColumnSpan="3"
+               HorizontalAlignment="Center"
+               FontSize="25"
+               Content="Gym Membership Management"/>
+
+        <Label Name="lblMessage"
+               Grid.Column="0"
+               Grid.Row="1"
+               Grid.ColumnSpan="3"
+               HorizontalAlignment="Center"
+               FontSize="15"
+               Content="Login Details"/>
+
+        <Label Grid.Column="0"
+               Grid.Row="2"
+               Content="Username:"
+               FontSize="10"
+               Margin="20,0,0,0"/>
+
+        <Label Grid.Column="0"
+               Grid.Row="3"
+               Content="Password:"
+               FontSize="10"
+               Margin="20,0,0,0"
+               />
+
+        <TextBox Name="tbxUsername"
+                 Grid.Column="1"
+                 Grid.Row="2"
+                 FontSize="10"
+                 Height="26"
+                 Width="200"
+                 TabIndex="0"
+                 Margin="0,0,0,10"/>
+
+        <PasswordBox Name="tbxPassword"
+                     Grid.Column="1"
+                     Grid.Row="3"
+                     FontSize="10"
+                     Height="26"
+                     Width="200"
+                     TabIndex="1"/>
+
+
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="btnCancel" Content="Cancel"  Height="26" Width="120"  Margin="10,1" TabIndex="3"/>
+            <Button Name="btnOK" Content="OK" Height="26" Width="120" Margin="10,1" TabIndex="2"/>
+        </StackPanel>
+
     </Grid>
 </Window>

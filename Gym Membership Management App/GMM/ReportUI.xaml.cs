@@ -10,30 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GMM
 {
     /// <summary>
-    /// Interaction logic for DashBoard.xaml
+    /// Interaction logic for ReportUI.xaml
     /// </summary>
-    public partial class DashBoard : Window
+    public partial class ReportUI : Page
     {
-        public DashBoard()
+        public ReportUI()
         {
             InitializeComponent();
-        }
-
-        private void btnAdmin_Click(object sender, RoutedEventArgs e)
-        {
-            AdminUI adminUI = new AdminUI();
-            frmMain.Navigate(adminUI);
-        }
-
-        private void btnReport_Click(object sender, RoutedEventArgs e)
-        {
-            ReportUI reportUI = new ReportUI();
-            frmMain.Navigate(reportUI);
         }
     }
 }

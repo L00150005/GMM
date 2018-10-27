@@ -23,5 +23,11 @@ namespace GMM
         {
             InitializeComponent();
         }
+
+        private void btnAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            AdminUI adminUI = new AdminUI();
+            frmMain.Navigate(adminUI);
+        }
     }
 }

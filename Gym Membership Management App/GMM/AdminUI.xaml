@@ -9,6 +9,102 @@
       Title="AdminUI">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="12*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="50*"/>
+            <ColumnDefinition Width ="50*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+
+                <ListView Name="lstUsers" Grid.Row="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="User ID" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="UserName" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Password" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Security Level" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            
+        </StackPanel>
+
+        <StackPanel Name="stkAddEdit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+         
+            <Grid>
+                    
+                 <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Content="User ID" Grid.Column="0" Grid.Row="0" Width="100"  Margin="10,10,0,0"/>
+                <Label Content="UserName" Grid.Column="0" Grid.Row="1" Width="100"  Margin="10,10,0,0"/>
+                <Label Content="Name" Grid.Column="0" Grid.Row="2" Width="100"  Margin="10,10,0,0"/>
+                <TextBox Name="txbUserID" Grid.Column="1" Grid.Row="0" Width="200" Height="26"/>
+                <TextBox Name="txbUserName" Grid.Column="1" Grid.Row="1" Width="200" Height="26"/>
+                <TextBox Name="txbName" Grid.Column="1" Grid.Row="2" Width="200" Height="26"/>
+
+                <Label Content="Password" Grid.Column="2" Grid.Row="1" Width="100"  Margin="10,10,0,0"/>
+                <Label Content="Security Level" Grid.Column="2" Grid.Row="2" Width="100"  Margin="10,10,0,0"/>
+                <TextBox Name="txbPassword" Grid.Column="3" Grid.Row="1" Width="200" Height="26"/>
+                <ComboBox Name="cmbSecurity" Grid.Column="3" Grid.Row="2" Width="200" Height="26"/>
+
+                <StackPanel Grid.Column="3" Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <Button Name="btnCancelUpdate" Content="Cancel" Width="100" Height="26" Margin="10"/>
+                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="10"/>
+                </StackPanel>
+
+            </Grid>
+            
+
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="btnCancel" Content="Cancel" Width="100" Height="26" Margin="10"/>
+            <Button Name="btnEdit" Content="Edit" Width="100" Height="26" Margin="10"/>
+            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10"/>
+        </StackPanel>
+
     </Grid>
 </Page>

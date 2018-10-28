@@ -58,6 +58,9 @@
     <Compile Include="ClientUI.xaml.cs">
       <DependentUpon>ClientUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlanUI.xaml.cs">
+      <DependentUpon>PlanUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportUI.xaml.cs">
       <DependentUpon>ReportUI.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PlanUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReportUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

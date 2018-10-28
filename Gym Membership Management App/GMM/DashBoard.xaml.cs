@@ -47,5 +47,11 @@ namespace GMM
             SearchUI searchUI = new SearchUI();
             frmMain.Navigate(searchUI);
         }
+
+        private void btnPlan_Click(object sender, RoutedEventArgs e)
+        {
+            PlanUI planUI = new PlanUI();
+            frmMain.Navigate(planUI);
+        }
     }
 }

@@ -35,5 +35,11 @@ namespace GMM
             ReportUI reportUI = new ReportUI();
             frmMain.Navigate(reportUI);
         }
+
+        private void btnClient_Click(object sender, RoutedEventArgs e)
+        {
+            ClientUI clientUI = new ClientUI();
+            frmMain.Navigate(clientUI);
+        }
     }
 }

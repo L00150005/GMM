@@ -55,12 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientUI.xaml.cs">
+      <DependentUpon>ClientUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportUI.xaml.cs">
       <DependentUpon>ReportUI.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ClientUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DashBoard.xaml">
       <SubType>Designer</SubType>

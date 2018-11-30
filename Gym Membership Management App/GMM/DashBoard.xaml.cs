@@ -1,4 +1,5 @@
-﻿using System;
+﻿using databaseLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace GMM
     /// </summary>
     public partial class DashBoard : Window
     {
+        public tblUser user = new tblUser();
         public DashBoard()
         {
             InitializeComponent();
+
         }
 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
@@ -52,6 +55,25 @@ namespace GMM
         {
             PlanUI planUI = new PlanUI();
             frmMain.Navigate(planUI);
+        }
+
+        private void setMenuAccess(tblUser user)
+        {
+            // Ensure that only Admin users can see the Admin, Client and Plan buttons
+            // in the stkAdminButtons stack panel.
+            if (user.userSecurityLevel == 1)
+            {
+                stkAdminButtons.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                stkAdminButtons.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            setMenuAccess(user);
         }
     }
 }

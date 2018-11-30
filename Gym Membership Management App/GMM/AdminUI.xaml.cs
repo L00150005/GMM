@@ -1,4 +1,5 @@
-﻿using System;
+﻿using databaseLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,25 @@ namespace GMM
     /// </summary>
     public partial class AdminUI : Page
     {
+        databaseLibrary.theGymDBEntities db = new databaseLibrary.theGymDBEntities("metadata=res://*/GymManagementModel.csdl|res://*/GymManagementModel.ssdl|res://*/GymManagementModel.msl;provider=System.Data.SqlClient;provider connection string = 'data source=192.168.0.184;initial catalog=theGymDB;user id = bcl; password = Galway95; pooling=False;MultipleActiveResultSets=True;App=EntityFramework'");
+
+        List<tblUser> users = new List<tblUser>();
+
         public AdminUI()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Load data from our users table to the grid
+            foreach (var user in db.tblUsers)
+            {
+                users.Add(user);
+            }
+
+            lstUsers.ItemsSource = users;
+            
         }
     }
 }

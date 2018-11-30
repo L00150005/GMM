@@ -44,6 +44,7 @@ namespace GMM
                 {
                     // Create a new instance of the dashboard screen and pass the validatedUser object to it.
                     DashBoard dashBoard = new DashBoard();
+                    dashBoard.Owner = this;
                     dashBoard.user = validatedUser;
                     dashBoard.ShowDialog();
                     this.Hide();

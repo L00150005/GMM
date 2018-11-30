@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:GMM"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="AdminUI">
 
     <Grid>
@@ -28,28 +29,28 @@
                             <GridViewColumn Header="User ID" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userID}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="UserName" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userName}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Password" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userPassword}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Security Level" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userSecurityLevel}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

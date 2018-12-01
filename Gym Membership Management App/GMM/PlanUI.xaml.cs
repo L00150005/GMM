@@ -24,6 +24,8 @@ namespace GMM
         databaseLibrary.theGymDBEntities db = new databaseLibrary.theGymDBEntities("metadata=res://*/GymManagementModel.csdl|res://*/GymManagementModel.ssdl|res://*/GymManagementModel.msl;provider=System.Data.SqlClient;provider connection string = 'data source=192.168.0.184;initial catalog=theGymDB;user id = bcl; password = Galway95; pooling=False;MultipleActiveResultSets=True;App=EntityFramework'");
         List<tblPlan> plans = new List<tblPlan>();
 
+        int SaveStatus = 0;
+
         public PlanUI()
         {
             InitializeComponent();
@@ -32,13 +34,66 @@ namespace GMM
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             // Load data from our Plan table to the grid
-            foreach (var user in db.tblPlans)
+            refreshPlanList();     
+
+        }
+
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+
+            stkPlanButtons.Visibility = Visibility.Hidden;
+            stkAdd.Visibility = Visibility.Visible;
+        }
+
+        private void SavePlan(tblPlan plan)
+        {
+            db.Entry(plan).State = System.Data.Entity.EntityState.Added;
+            SaveStatus = db.SaveChanges();
+
+        }
+
+
+        private void refreshPlanList()
+        {
+            plans.Clear();
+
+            foreach (var plan in db.tblPlans)
             {
-                plans.Add(user);
+                plans.Add(plan);
             }
 
             lstPlans.ItemsSource = plans;
+            lstPlans.Items.Refresh();
 
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            tblPlan plan = new tblPlan();
+            plan.planName = txbPlanName.Text.Trim();
+            plan.planDescription = txbPlanDesc.Text.Trim();
+            plan.planPrice = int.Parse(txbPrice.Text.Trim());
+            plan.planTerm = "1";
+
+            SavePlan(plan);
+            if (SaveStatus == 1)
+            {
+                txbPlanName.Text = "";
+                txbPlanDesc.Text = "";
+                txbPrice.Text = "";
+                
+                stkAdd.Visibility = Visibility.Hidden;
+                stkPlanButtons.Visibility = Visibility.Visible;
+
+
+                MessageBox.Show("New Plan created", "GMM", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                refreshPlanList();
+            }
+            else
+            {
+                MessageBox.Show("Unable to Save Plan", "GMM", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -24,34 +24,34 @@
 
         <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
 
-            <ListView Name="lstPlans" Grid.Row="0">
+            <ListView Name="lstPlans" Grid.Row="0" Height="500">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Plan ID" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text ="{Binding planID}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Plan Name" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding planName}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Plan Desc." Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding planDescription}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Duration" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding planTerm}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -61,7 +61,7 @@
 
         </StackPanel>
 
-        <StackPanel Name="stkAdd" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1">
+        <StackPanel Name="stkAdd" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Visibility="Collapsed">
 
             <Grid>
 
@@ -93,7 +93,7 @@
 
                 <StackPanel Grid.Column="3" Grid.Row="6" HorizontalAlignment="Center" Orientation="Horizontal" >
                     <Button Name="btnCancelUpdate" Content="Cancel" Width="100" Height="26" Margin="5"/>
-                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="5"/>
+                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="5" Click="btnSave_Click"/>
                 </StackPanel>
 
             </Grid>
@@ -102,10 +102,10 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+        <StackPanel Name ="stkPlanButtons" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2">
             <Button Name="btnCancel" Content="Cancel" Width="100" Height="26" Margin="10"/>
             <Button Name="btnEdit" Content="Edit" Width="100" Height="26" Margin="10"/>
-            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10"/>
+            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10" Click="btnAddNew_Click"/>
         </StackPanel>
     </Grid>
 </Page>

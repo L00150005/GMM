@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:GMM"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Loaded="Window_Loaded"
+      Loaded="Page_Loaded"
       Title="ClientUI">
 
     <Grid>
@@ -23,34 +23,34 @@
 
         <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
-            <ListView Name="lstClients" Grid.Row="0">
+            <ListView Name="lstClients" Grid.Row="0" Height="500">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Gym ID" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding clientID}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Firstname" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding firstName}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Surname" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding lastName}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Date of Birth" Width="150">
+                        <GridViewColumn Header="Date of Birth" Width="150" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding DOB}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -60,7 +60,7 @@
 
         </StackPanel>
 
-        <StackPanel Name="stkAddEdit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <StackPanel Name="stkAddEdit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed">
 
             <Grid>
 
@@ -101,8 +101,8 @@
                 <ComboBox Name="cmbSex" Grid.Column="3" Grid.Row="2" Width="200" Height="26"/>
 
                 <StackPanel Grid.Column="3" Grid.Row="4" HorizontalAlignment="Center" Orientation="Horizontal" >
-                    <Button Name="btnCancelUpdate" Content="Cancel" Width="100" Height="26" Margin="10"/>
-                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="10"/>
+                    <Button Name="btnCancelUpdate" Content="Cancel" Width="100" Height="26" Margin="10" Click="btnCancelUpdate_Click"/>
+                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="10" Click="btnSave_Click"/>
                 </StackPanel>
 
             </Grid>
@@ -111,10 +111,10 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Name="stkClientButtons"  Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="btnCancel" Content="Cancel" Width="100" Height="26" Margin="10"/>
             <Button Name="btnEdit" Content="Edit" Width="100" Height="26" Margin="10"/>
-            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10"/>
+            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10" Click="btnAddNew_Click"/>
         </StackPanel>
     </Grid>
 </Page>

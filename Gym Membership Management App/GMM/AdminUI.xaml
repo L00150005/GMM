@@ -23,7 +23,7 @@
 
         <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
-                <ListView Name="lstUsers" Grid.Row="0" Height="500">
+                <ListView Name="lstUsers" Grid.Row="0" Height="500" SelectionChanged="lstUsers_SelectionChanged">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="User ID" Width="150">

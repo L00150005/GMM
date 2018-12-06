@@ -24,7 +24,17 @@ namespace GMM
         databaseLibrary.theGymDBEntities db = new databaseLibrary.theGymDBEntities("metadata=res://*/GymManagementModel.csdl|res://*/GymManagementModel.ssdl|res://*/GymManagementModel.msl;provider=System.Data.SqlClient;provider connection string = 'data source=192.168.0.184;initial catalog=theGymDB;user id = bcl; password = Galway95; pooling=False;MultipleActiveResultSets=True;App=EntityFramework'");
         List<tblPlan> plans = new List<tblPlan>();
 
-        int SaveStatus = 0;
+        int intSaveStatus = 0;
+
+        tblPlan selectedPlan = new tblPlan();
+
+        enum dbOperation
+        {
+            Add,
+            Edit
+        }
+
+        dbOperation dbOp = new dbOperation();
 
         public PlanUI()
         {
@@ -40,15 +50,15 @@ namespace GMM
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
-
+            dbOp = dbOperation.Add;
             stkPlanButtons.Visibility = Visibility.Hidden;
-            stkAdd.Visibility = Visibility.Visible;
+            stkAddEdit.Visibility = Visibility.Visible;
         }
 
         private void SavePlan(tblPlan plan)
         {
             db.Entry(plan).State = System.Data.Entity.EntityState.Added;
-            SaveStatus = db.SaveChanges();
+            intSaveStatus = db.SaveChanges();
 
         }
 
@@ -69,31 +79,81 @@ namespace GMM
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            tblPlan plan = new tblPlan();
-            plan.planName = txbPlanName.Text.Trim();
-            plan.planDescription = txbPlanDesc.Text.Trim();
-            plan.planPrice = int.Parse(txbPrice.Text.Trim());
-            plan.planTerm = "1";
-
-            SavePlan(plan);
-            if (SaveStatus == 1)
+            if (dbOp == dbOperation.Add)
             {
-                txbPlanName.Text = "";
-                txbPlanDesc.Text = "";
-                txbPrice.Text = "";
-                
-                stkAdd.Visibility = Visibility.Hidden;
-                stkPlanButtons.Visibility = Visibility.Visible;
+                tblPlan plan = new tblPlan();
+                plan.planName = txbPlanName.Text.Trim();
+                plan.planDescription = txbPlanDesc.Text.Trim();
+                plan.planPrice = int.Parse(txbPrice.Text.Trim());
+                plan.planTerm = "1";
+
+                SavePlan(plan);
+                if (intSaveStatus == 1)
+                {
+                    txbPlanName.Text = "";
+                    txbPlanDesc.Text = "";
+                    txbPrice.Text = "";
+
+                    stkAddEdit.Visibility = Visibility.Hidden;
+                    stkPlanButtons.Visibility = Visibility.Visible;
 
 
-                MessageBox.Show("New Plan created", "GMM", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("New Plan created", "GMM", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                refreshPlanList();
+                    refreshPlanList();
+                }
+                else
+                {
+                    MessageBox.Show("Unable to Save Plan", "GMM", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Unable to Save Plan", "GMM", MessageBoxButton.OK, MessageBoxImage.Error);
+                // This is the update of an existing plan.
+
+                foreach (var plan in db.tblPlans.Where(d => d.planID == selectedPlan.planID))
+                {
+                    selectedPlan.planID = int.Parse(txbPlanID.Text.Trim());
+                    selectedPlan.planName = txbPlanName.Text.Trim();
+                    selectedPlan.planDescription = txbPlanDesc.Text.Trim();
+                    selectedPlan.planPrice = int.Parse(txbPrice.Text.Trim());
+                    //selectedPlan.planTerm = int.Parse(txbp.Text.Trim());
+                    selectedPlan.planTerm = "3";
+
+                    intSaveStatus = db.SaveChanges();
+
+                    if (intSaveStatus == 1)
+                    {
+                        refreshPlanList();
+                        stkAddEdit.Visibility = Visibility.Hidden;
+                        stkPlanButtons.Visibility = Visibility.Visible;
+
+                        MessageBox.Show("Plan Updated", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to Update Plan", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
             }
+        }
+
+        private void lstPlans_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dbOp = dbOperation.Edit;
+
+            stkAddEdit.Visibility = Visibility.Visible;
+            stkPlanButtons.Visibility = Visibility.Hidden;
+            selectedPlan = plans.ElementAt(lstPlans.SelectedIndex);
+            if (selectedPlan.planID > 0)
+            {
+                selectedPlan.planID = int.Parse(txbPlanID.Text.Trim());
+                selectedPlan.planName = txbPlanName.Text.Trim();
+                selectedPlan.planDescription = txbPlanDesc.Text.Trim();
+                selectedPlan.planPrice = int.Parse(txbPrice.Text.Trim());
+                selectedPlan.planTerm = "1";
+            }
+
         }
     }
 }

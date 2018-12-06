@@ -25,7 +25,17 @@ namespace GMM
 
         List<tblUser> users = new List<tblUser>();
 
-        int SaveStatus = 0;
+        int intSaveStatus = 0;
+
+        tblUser selectedUser = new tblUser();
+
+        enum dbOperation
+        {
+            Add,
+            Edit
+        }
+
+        dbOperation dbOp = new dbOperation();
 
         public AdminUI()
         {
@@ -41,6 +51,8 @@ namespace GMM
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
+            dbOp = dbOperation.Add;
+
             stkUserButtons.Visibility = Visibility.Hidden;
             stkAddEdit.Visibility = Visibility.Visible;
             txbUserID.IsEnabled = false;
@@ -49,38 +61,70 @@ namespace GMM
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            tblUser user = new tblUser();
-            user.userName = txbUserName.Text.Trim();
-            user.userPassword = txbPassword.Text.Trim();
-            user.userSecurityLevel = int.Parse(txbSecurity.Text.Trim());
-
-            SaveUser(user);
-            if(SaveStatus == 1)
+            if (dbOp == dbOperation.Add)
             {
 
-                txbUserName.Text = "";
-                txbPassword.Text = "";
-                txbSecurity.Text = "";
-                stkAddEdit.Visibility = Visibility.Hidden;
-                stkUserButtons.Visibility = Visibility.Visible;
-                
 
-                MessageBox.Show("New User created", "GMM", MessageBoxButton.OK, MessageBoxImage.Information);
+                tblUser user = new tblUser();
+                user.userName = txbUserName.Text.Trim();
+                user.userPassword = txbPassword.Text.Trim();
+                user.userSecurityLevel = int.Parse(txbSecurity.Text.Trim());
 
-                refreshUserList();
+                SaveUser(user);
+                if (intSaveStatus == 1)
+                {
+
+                    txbUserName.Text = "";
+                    txbPassword.Text = "";
+                    txbSecurity.Text = "";
+                    stkAddEdit.Visibility = Visibility.Hidden;
+                    stkUserButtons.Visibility = Visibility.Visible;
+
+
+                    MessageBox.Show("New User created", "Save", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    refreshUserList();
+                }
+                else
+                {
+                    MessageBox.Show("Unable to Save User", "Save", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
             }
             else
             {
-                MessageBox.Show("Unable to Save User", "GMM", MessageBoxButton.OK, MessageBoxImage.Error);
+                // This is the update of an existing user.
+
+                foreach (var user in db.tblUsers.Where(d => d.userID == selectedUser.userID))
+                {
+                    selectedUser.userID = int.Parse(txbUserID.Text.Trim());
+                    selectedUser.userName = txbUserName.Text.Trim();
+                    selectedUser.userPassword = txbPassword.Text.Trim();
+                    selectedUser.userSecurityLevel = int.Parse(txbSecurity.Text.Trim());
+
+                    intSaveStatus = db.SaveChanges();
+
+                    if (intSaveStatus == 1)
+                    {
+                        refreshUserList();
+                        stkAddEdit.Visibility = Visibility.Hidden;
+                        stkUserButtons.Visibility = Visibility.Visible;
+
+                        MessageBox.Show("User Updated", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to Update User", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+
             }
-
-
         }
 
         private void SaveUser(tblUser user)
         {
             db.Entry(user).State = System.Data.Entity.EntityState.Added;
-            SaveStatus = db.SaveChanges();
+            intSaveStatus = db.SaveChanges();
         
         }
 
@@ -100,7 +144,26 @@ namespace GMM
 
         private void btnCancelUpdate_Click(object sender, RoutedEventArgs e)
         {
+            // Cancel out of the Add or update record.
+            stkAddEdit.Visibility = Visibility.Hidden;
+            stkUserButtons.Visibility = Visibility.Visible;
+        }
 
+        private void lstUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dbOp = dbOperation.Edit;
+
+            stkAddEdit.Visibility = Visibility.Visible;
+            stkUserButtons.Visibility = Visibility.Hidden;
+            selectedUser = users.ElementAt(lstUsers.SelectedIndex);
+            if(selectedUser.userID > 0)
+            {
+                txbUserID.Text = selectedUser.userID.ToString();
+                txbUserName.Text = selectedUser.userName;
+                txbPassword.Text = selectedUser.userPassword;
+                txbSecurity.Text = selectedUser.userSecurityLevel.ToString();
+            }
+            
         }
     }
 }

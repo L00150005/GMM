@@ -25,7 +25,17 @@ namespace GMM
 
         List<tblClient> clients = new List<tblClient>();
 
-        int SaveStatus = 0;
+        int intSaveStatus = 0;
+
+        tblClient selectedClient = new tblClient();
+
+        enum dbOperation
+        {
+            Add,
+            Edit
+        }
+
+        dbOperation dbOp = new dbOperation();
 
         public ClientUI()
         {
@@ -35,9 +45,9 @@ namespace GMM
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
-            
-                stkAddEdit.Visibility = Visibility.Visible;
-                stkClientButtons.Visibility = Visibility.Hidden;
+            dbOp = dbOperation.Add;
+            stkAddEdit.Visibility = Visibility.Visible;
+            stkClientButtons.Visibility = Visibility.Hidden;
       
         }
 
@@ -52,48 +62,84 @@ namespace GMM
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            tblClient client = new tblClient();
-            client.firstName = txbFirstname.Text.Trim();
-            client.lastName = txbSurname.Text.Trim();
-            client.phoneNo = txbPhone.Text.Trim();
-            client.address1 = txbAddress1.Text.Trim();
-            client.address2 = txbAddress2.Text.Trim();
-            client.DOB = DateTime.Parse(txbDOB.Text.Trim());
-
-            SaveUser(client);
-            if (SaveStatus == 1)
+            if (dbOp == dbOperation.Add)
             {
+                tblClient client = new tblClient();
+                client.firstName = txbFirstname.Text.Trim();
+                client.lastName = txbSurname.Text.Trim();
+                client.phoneNo = txbPhone.Text.Trim();
+                client.address1 = txbAddress1.Text.Trim();
+                client.address2 = txbAddress2.Text.Trim();
+                client.DOB = DateTime.Parse(txbDOB.Text.Trim());
 
-                txbFirstname.Text = "";
-                txbSurname.Text = "";
-                txbPhone.Text = "";
-                txbAddress1.Text = "";
-                txbAddress2.Text = "";
-                txbDOB.Text = "";
-                stkAddEdit.Visibility = Visibility.Hidden;
-                stkClientButtons.Visibility = Visibility.Visible;
+                SaveUser(client);
+                if (intSaveStatus == 1)
+                {
+
+                    txbFirstname.Text = "";
+                    txbSurname.Text = "";
+                    txbPhone.Text = "";
+                    txbAddress1.Text = "";
+                    txbAddress2.Text = "";
+                    txbDOB.Text = "";
+                    stkAddEdit.Visibility = Visibility.Hidden;
+                    stkClientButtons.Visibility = Visibility.Visible;
 
 
-                MessageBox.Show("New Client created", "GMM", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("New Client created", "GMM", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                refreshClientList();
+                    refreshClientList();
+                }
+                else
+                {
+                    MessageBox.Show("Unable to Save Client", "GMM", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Unable to Save Client", "GMM", MessageBoxButton.OK, MessageBoxImage.Error);
+                // This is the update of an existing client.
+
+                foreach (var client in db.tblClients.Where(d => d.clientID == selectedClient.clientID))
+                {
+                    selectedClient.clientID = int.Parse(txbGymID .Text.Trim());
+                    selectedClient.firstName = txbFirstname.Text.Trim();
+                    selectedClient.lastName = txbSurname.Text.Trim();
+                    selectedClient.address1 = txbAddress1.Text.Trim();
+                    selectedClient.address2 = txbAddress2.Text.Trim();
+                    selectedClient.phoneNo = txbPhone.Text.Trim().ToString();
+                    selectedClient.DOB = DateTime.Parse(txbDOB.Text.Trim());
+
+                    intSaveStatus = db.SaveChanges();
+
+                    if (intSaveStatus == 1)
+                    {
+                        refreshClientList();
+                        stkAddEdit.Visibility = Visibility.Hidden;
+                        stkClientButtons.Visibility = Visibility.Visible;
+
+                        MessageBox.Show("Client Updated", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to Update Client", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
             }
 
         }
 
         private void btnCancelUpdate_Click(object sender, RoutedEventArgs e)
         {
+            // Cancel out of the Add or update record.
+            stkAddEdit.Visibility = Visibility.Hidden;
+            stkClientButtons.Visibility = Visibility.Visible;
 
         }
 
         private void SaveUser(tblClient client)
         {
             db.Entry(client).State = System.Data.Entity.EntityState.Added;
-            SaveStatus = db.SaveChanges();
+            intSaveStatus = db.SaveChanges();
 
         }
 
@@ -110,6 +156,28 @@ namespace GMM
 
             lstClients.ItemsSource = clients;
             lstClients.Items.Refresh();
+
+        }
+
+        private void lstClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dbOp = dbOperation.Edit;
+
+            stkAddEdit.Visibility = Visibility.Visible;
+            stkClientButtons.Visibility = Visibility.Hidden;
+            selectedClient = clients.ElementAt(lstClients.SelectedIndex);
+            if (selectedClient.clientID > 0)
+            {
+                txbGymID.Text = selectedClient.clientID.ToString();
+                txbFirstname.Text = selectedClient.firstName;
+                txbSurname.Text = selectedClient.lastName;
+                txbAddress1.Text = selectedClient.address1;
+                txbAddress2.Text = selectedClient.address2;
+                txbDOB.Text =  selectedClient.DOB.ToString();
+                txbPhone.Text = selectedClient.phoneNo.ToString();
+
+
+            }
 
         }
     }

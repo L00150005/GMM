@@ -24,7 +24,7 @@
 
         <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
 
-            <ListView Name="lstPlans" Grid.Row="0" Height="500">
+            <ListView Name="lstPlans" Grid.Row="0" Height="500" SelectionChanged="lstPlans_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Plan ID" Width="150">
@@ -61,7 +61,7 @@
 
         </StackPanel>
 
-        <StackPanel Name="stkAdd" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Visibility="Collapsed">
+        <StackPanel Name="stkAddEdit" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Visibility="Collapsed">
 
             <Grid>
 

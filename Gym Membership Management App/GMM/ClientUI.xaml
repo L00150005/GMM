@@ -23,7 +23,7 @@
 
         <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
-            <ListView Name="lstClients" Grid.Row="0" Height="500">
+            <ListView Name="lstClients" Grid.Row="0" Height="500" SelectionChanged="lstClients_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Gym ID" Width="150">

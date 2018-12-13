@@ -20,6 +20,7 @@ namespace GMM
     /// </summary>
     public partial class DashBoard : Window
     {
+        // Create a new User object
         public tblUser user = new tblUser();
         public DashBoard()
         {

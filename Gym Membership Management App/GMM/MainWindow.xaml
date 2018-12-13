@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Title="MainWindow" Height="450" Width="800" MaxWidth="450" MaxHeight="300" MinWidth="450" MinHeight="300">
-        
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -17,12 +17,12 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-  
+
         </Grid.ColumnDefinitions>
 
         <Label Name="lblTitle" 
@@ -57,19 +57,15 @@
         <TextBox Name="tbxUsername"
                  Grid.Column="1"
                  Grid.Row="2"
-                 FontSize="10"
-                 Height="26"
                  Width="200"
                  TabIndex="0"
-                 Margin="0,0,0,10"/>
+                 Margin="40,5,40,10"/>
 
         <PasswordBox Name="tbxPassword"
                      Grid.Column="1"
                      Grid.Row="3"
-                     FontSize="10"
-                     Height="26"
                      Width="200"
-                     TabIndex="1"/>
+                     TabIndex="1" Margin="40,10,40,0"/>
 
 
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">

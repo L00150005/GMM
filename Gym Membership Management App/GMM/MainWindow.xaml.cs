@@ -22,8 +22,9 @@ namespace GMM
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        // Create the connection to the database.
         databaseLibrary.theGymDBEntities db = new databaseLibrary.theGymDBEntities("metadata=res://*/GymManagementModel.csdl|res://*/GymManagementModel.ssdl|res://*/GymManagementModel.msl;provider=System.Data.SqlClient;provider connection string = 'data source=192.168.0.184;initial catalog=theGymDB;user id = bcl; password = Galway95; pooling=False;MultipleActiveResultSets=True;App=EntityFramework'");
+
         private tblUser validatedUser = new tblUser();
 
         public MainWindow()
@@ -52,13 +53,13 @@ namespace GMM
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Username or Password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid Username or Password", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 
             }
             else
             {
-                MessageBox.Show("Username and/or Password cannot be blank", "Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Username and/or Password cannot be blank", "Login Error",MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -92,7 +93,8 @@ namespace GMM
             }
            catch(EntityException ex)
             {
-                MessageBox.Show("Problem connecting to the SQL Server", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Unable to connect to the database, please try again later.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Exit out of the application, if unable to connect to the database
                 this.Close();
                 Environment.Exit(0);
                 throw;

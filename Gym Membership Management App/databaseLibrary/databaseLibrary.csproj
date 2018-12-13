@@ -104,6 +104,7 @@
       <LastGenOutput>GymManagementModel.Context.cs</LastGenOutput>
       <DependentUpon>GymManagementModel.edmx</DependentUpon>
     </Content>
+    <Content Include="GymManagementModel.edmx.sql" />
     <Content Include="GymManagementModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GymManagementModel.edmx</DependentUpon>

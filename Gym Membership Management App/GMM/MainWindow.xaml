@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Title="MainWindow" Height="450" Width="800" MaxWidth="450" MaxHeight="300" MinWidth="450" MinHeight="300">
+        Title="MainWindow" Height="350" Width="800" MaxWidth="450" MaxHeight="300" MinWidth="450" MinHeight="300" BorderBrush="Black">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -15,7 +15,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="77*" />
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -31,15 +32,14 @@
                Grid.ColumnSpan="3"
                HorizontalAlignment="Center"
                FontSize="25"
-               Content="Gym Membership Management"/>
+               Content="Gym Membership Management" Margin="41,0"/>
 
         <Label Name="lblMessage"
-               Grid.Column="0"
+               Grid.Column="1"
                Grid.Row="1"
-               Grid.ColumnSpan="3"
                HorizontalAlignment="Center"
                FontSize="15"
-               Content="Login Details"/>
+               Content="Login Details" Margin="96,0,88,0"/>
 
         <Label Grid.Column="0"
                Grid.Row="2"
@@ -68,9 +68,17 @@
                      TabIndex="1" Margin="40,10,40,0"/>
 
 
-        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="btnCancel" Content="Cancel"  Height="26" Width="120"  Margin="10,1" TabIndex="3" Click="btnCancel_Click"/>
-            <Button Name="btnOK" Content="OK" Height="26" Width="120" Margin="10,1" TabIndex="2" Click="btnOK_Click"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="30,0" Grid.RowSpan="2">
+            <Button Name="btnOK" Content="OK" Height="26" Width="90" Margin="10,1" TabIndex="2" Click="btnOK_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
+            <Button Name="btnCancel" Content="Cancel"  Height="26" Width="90"  Margin="10,1" TabIndex="3" Click="btnCancel_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
         </StackPanel>
 
     </Grid>

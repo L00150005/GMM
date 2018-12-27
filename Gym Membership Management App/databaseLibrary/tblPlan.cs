@@ -14,19 +14,10 @@ namespace databaseLibrary
     
     public partial class tblPlan
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblPlan()
-        {
-            this.tblClientMemberships = new HashSet<tblClientMembership>();
-        }
-    
         public int planID { get; set; }
         public string planName { get; set; }
         public string planDescription { get; set; }
         public string planTerm { get; set; }
         public int planPrice { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblClientMembership> tblClientMemberships { get; set; }
     }
 }

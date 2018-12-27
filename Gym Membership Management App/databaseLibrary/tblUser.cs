@@ -18,6 +18,7 @@ namespace databaseLibrary
         public string userName { get; set; }
         public string userPassword { get; set; }
         public int userSecurityLevel { get; set; }
+        public string userFullname { get; set; }
     
         public virtual tblSecurityLevel tblSecurityLevel { get; set; }
     }

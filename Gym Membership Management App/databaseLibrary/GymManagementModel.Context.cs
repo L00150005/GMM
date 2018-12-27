@@ -15,8 +15,8 @@ namespace databaseLibrary
     
     public partial class theGymDBEntities : DbContext
     {
-        public theGymDBEntities(string strConnection)
-            : base(strConnection)
+        public theGymDBEntities(string entity)
+            : base(entity)
         {
         }
     
@@ -25,11 +25,9 @@ namespace databaseLibrary
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Table> Tables { get; set; }
-        public virtual DbSet<tblClient> tblClients { get; set; }
-        public virtual DbSet<tblClientMembership> tblClientMemberships { get; set; }
         public virtual DbSet<tblPlan> tblPlans { get; set; }
         public virtual DbSet<tblSecurityLevel> tblSecurityLevels { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblClient> tblClients { get; set; }
     }
 }

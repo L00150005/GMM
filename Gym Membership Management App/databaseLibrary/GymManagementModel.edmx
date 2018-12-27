@@ -4,19 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="theGymDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Table">
-          <Key>
-            <PropertyRef Name="clientID" />
-          </Key>
-          <Property Name="clientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DOB" Type="datetime" Nullable="false" />
-          <Property Name="address1" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="address2" Type="varchar" MaxLength="50" />
-          <Property Name="phoneNo" Type="varchar" MaxLength="20" />
-        </EntityType>
+    <Schema Namespace="theGymDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblClient">
           <Key>
             <PropertyRef Name="clientID" />
@@ -28,16 +16,8 @@
           <Property Name="address1" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="address2" Type="varchar" MaxLength="50" />
           <Property Name="phoneNo" Type="varchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="tblClientMembership">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="clientID" Type="int" Nullable="false" />
-          <Property Name="planID" Type="int" Nullable="false" />
-          <Property Name="startDate" Type="datetime" Nullable="false" />
-          <Property Name="endDate" Type="datetime" Nullable="false" />
+          <Property Name="Sex" Type="nchar" MaxLength="10" />
+          <Property Name="planType" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tblPlan">
           <Key>
@@ -64,31 +44,8 @@
           <Property Name="userName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="userPassword" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="userSecurityLevel" Type="int" Nullable="false" />
+          <Property Name="userFullname" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_tblClientMembership_TO_tblClient">
-          <End Role="tblClient" Type="Self.tblClient" Multiplicity="1" />
-          <End Role="tblClientMembership" Type="Self.tblClientMembership" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblClient">
-              <PropertyRef Name="clientID" />
-            </Principal>
-            <Dependent Role="tblClientMembership">
-              <PropertyRef Name="clientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblClientMembership_TO_tblPlan">
-          <End Role="tblPlan" Type="Self.tblPlan" Multiplicity="1" />
-          <End Role="tblClientMembership" Type="Self.tblClientMembership" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblPlan">
-              <PropertyRef Name="planID" />
-            </Principal>
-            <Dependent Role="tblClientMembership">
-              <PropertyRef Name="planID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblUser_TO_tblSecurityLevel">
           <End Role="tblSecurityLevel" Type="Self.tblSecurityLevel" Multiplicity="1" />
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
@@ -102,67 +59,19 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="theGymDBModelStoreContainer">
-          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblClient" EntityType="Self.tblClient" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblClientMembership" EntityType="Self.tblClientMembership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPlan" EntityType="Self.tblPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSecurityLevel" EntityType="Self.tblSecurityLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_tblClientMembership_TO_tblClient" Association="Self.FK_tblClientMembership_TO_tblClient">
-            <End Role="tblClient" EntitySet="tblClient" />
-            <End Role="tblClientMembership" EntitySet="tblClientMembership" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblClientMembership_TO_tblPlan" Association="Self.FK_tblClientMembership_TO_tblPlan">
-            <End Role="tblPlan" EntitySet="tblPlan" />
-            <End Role="tblClientMembership" EntitySet="tblClientMembership" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblUser_TO_tblSecurityLevel" Association="Self.FK_tblUser_TO_tblSecurityLevel">
             <End Role="tblSecurityLevel" EntitySet="tblSecurityLevel" />
             <End Role="tblUser" EntitySet="tblUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="theGymDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Table">
-          <Key>
-            <PropertyRef Name="clientID" />
-          </Key>
-          <Property Name="clientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="phoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="tblClient">
-          <Key>
-            <PropertyRef Name="clientID" />
-          </Key>
-          <Property Name="clientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="phoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblClientMemberships" Relationship="Self.FK_tblClientMembership_TO_tblClient" FromRole="tblClient" ToRole="tblClientMembership" />
-        </EntityType>
-        <EntityType Name="tblClientMembership">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="clientID" Type="Int32" Nullable="false" />
-          <Property Name="planID" Type="Int32" Nullable="false" />
-          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="endDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="tblClient" Relationship="Self.FK_tblClientMembership_TO_tblClient" FromRole="tblClientMembership" ToRole="tblClient" />
-          <NavigationProperty Name="tblPlan" Relationship="Self.FK_tblClientMembership_TO_tblPlan" FromRole="tblClientMembership" ToRole="tblPlan" />
-        </EntityType>
         <EntityType Name="tblPlan">
           <Key>
             <PropertyRef Name="planID" />
@@ -172,7 +81,6 @@
           <Property Name="planDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="planTerm" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="planPrice" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblClientMemberships" Relationship="Self.FK_tblClientMembership_TO_tblPlan" FromRole="tblPlan" ToRole="tblClientMembership" />
         </EntityType>
         <EntityType Name="tblSecurityLevel">
           <Key>
@@ -180,45 +88,32 @@
           </Key>
           <Property Name="levelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="levelDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_TO_tblSecurityLevel" FromRole="tblSecurityLevel" ToRole="tblUser" />
+          <NavigationProperty Name="tblUsers" Relationship="theGymDBModel.FK_tblUser_TO_tblSecurityLevel" FromRole="tblSecurityLevel" ToRole="tblUser" />
         </EntityType>
+        <EntityContainer Name="theGymDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblPlans" EntityType="Self.tblPlan" />
+          <EntitySet Name="tblSecurityLevels" EntityType="Self.tblSecurityLevel" />
+          <EntitySet Name="tblUsers" EntityType="theGymDBModel.tblUser" />
+          <AssociationSet Name="FK_tblUser_TO_tblSecurityLevel" Association="theGymDBModel.FK_tblUser_TO_tblSecurityLevel">
+            <End Role="tblSecurityLevel" EntitySet="tblSecurityLevels" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+          <EntitySet Name="tblClients" EntityType="theGymDBModel.tblClient" />
+        </EntityContainer>
         <EntityType Name="tblUser">
           <Key>
             <PropertyRef Name="userID" />
           </Key>
           <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="userPassword" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="userPassword" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="userSecurityLevel" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblSecurityLevel" Relationship="Self.FK_tblUser_TO_tblSecurityLevel" FromRole="tblUser" ToRole="tblSecurityLevel" />
+          <Property Name="userFullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblSecurityLevel" Relationship="theGymDBModel.FK_tblUser_TO_tblSecurityLevel" FromRole="tblUser" ToRole="tblSecurityLevel" />
         </EntityType>
-        <Association Name="FK_tblClientMembership_TO_tblClient">
-          <End Role="tblClient" Type="Self.tblClient" Multiplicity="1" />
-          <End Role="tblClientMembership" Type="Self.tblClientMembership" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblClient">
-              <PropertyRef Name="clientID" />
-            </Principal>
-            <Dependent Role="tblClientMembership">
-              <PropertyRef Name="clientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblClientMembership_TO_tblPlan">
-          <End Role="tblPlan" Type="Self.tblPlan" Multiplicity="1" />
-          <End Role="tblClientMembership" Type="Self.tblClientMembership" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblPlan">
-              <PropertyRef Name="planID" />
-            </Principal>
-            <Dependent Role="tblClientMembership">
-              <PropertyRef Name="planID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblUser_TO_tblSecurityLevel">
-          <End Role="tblSecurityLevel" Type="Self.tblSecurityLevel" Multiplicity="1" />
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <End Type="theGymDBModel.tblSecurityLevel" Role="tblSecurityLevel" Multiplicity="1" />
+          <End Type="theGymDBModel.tblUser" Role="tblUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSecurityLevel">
               <PropertyRef Name="levelID" />
@@ -228,69 +123,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="theGymDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Tables" EntityType="Self.Table" />
-          <EntitySet Name="tblClients" EntityType="Self.tblClient" />
-          <EntitySet Name="tblClientMemberships" EntityType="Self.tblClientMembership" />
-          <EntitySet Name="tblPlans" EntityType="Self.tblPlan" />
-          <EntitySet Name="tblSecurityLevels" EntityType="Self.tblSecurityLevel" />
-          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
-          <AssociationSet Name="FK_tblClientMembership_TO_tblClient" Association="Self.FK_tblClientMembership_TO_tblClient">
-            <End Role="tblClient" EntitySet="tblClients" />
-            <End Role="tblClientMembership" EntitySet="tblClientMemberships" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblClientMembership_TO_tblPlan" Association="Self.FK_tblClientMembership_TO_tblPlan">
-            <End Role="tblPlan" EntitySet="tblPlans" />
-            <End Role="tblClientMembership" EntitySet="tblClientMemberships" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblUser_TO_tblSecurityLevel" Association="Self.FK_tblUser_TO_tblSecurityLevel">
-            <End Role="tblSecurityLevel" EntitySet="tblSecurityLevels" />
-            <End Role="tblUser" EntitySet="tblUsers" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="tblClient">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="address1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="planType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="theGymDBModelStoreContainer" CdmEntityContainer="theGymDBEntities">
-          <EntitySetMapping Name="Tables">
-            <EntityTypeMapping TypeName="theGymDBModel.Table">
-              <MappingFragment StoreEntitySet="Table">
-                <ScalarProperty Name="clientID" ColumnName="clientID" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="address1" ColumnName="address1" />
-                <ScalarProperty Name="address2" ColumnName="address2" />
-                <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblClients">
-            <EntityTypeMapping TypeName="theGymDBModel.tblClient">
-              <MappingFragment StoreEntitySet="tblClient">
-                <ScalarProperty Name="clientID" ColumnName="clientID" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="address1" ColumnName="address1" />
-                <ScalarProperty Name="address2" ColumnName="address2" />
-                <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblClientMemberships">
-            <EntityTypeMapping TypeName="theGymDBModel.tblClientMembership">
-              <MappingFragment StoreEntitySet="tblClientMembership">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="clientID" ColumnName="clientID" />
-                <ScalarProperty Name="planID" ColumnName="planID" />
-                <ScalarProperty Name="startDate" ColumnName="startDate" />
-                <ScalarProperty Name="endDate" ColumnName="endDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblPlans">
             <EntityTypeMapping TypeName="theGymDBModel.tblPlan">
               <MappingFragment StoreEntitySet="tblPlan">
@@ -313,10 +165,26 @@
           <EntitySetMapping Name="tblUsers">
             <EntityTypeMapping TypeName="theGymDBModel.tblUser">
               <MappingFragment StoreEntitySet="tblUser">
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userFullname" ColumnName="userFullname" />
                 <ScalarProperty Name="userSecurityLevel" ColumnName="userSecurityLevel" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblClients">
+            <EntityTypeMapping TypeName="theGymDBModel.tblClient">
+              <MappingFragment StoreEntitySet="tblClient">
+                <ScalarProperty Name="planType" ColumnName="planType" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

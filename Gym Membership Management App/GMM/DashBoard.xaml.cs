@@ -48,8 +48,18 @@ namespace GMM
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            SearchUI searchUI = new SearchUI();
-            frmMain.Navigate(searchUI);
+            if (txbSearch.Text == "")
+            {
+                MessageBox.Show("Please enter a Client number", "Search", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                // If a user inputs a client number, create a new instance of the Search screen
+                // and pass the client number to this new object.
+                SearchUI searchUI = new SearchUI();
+                searchUI.searchClient = int.Parse(txbSearch.Text);
+                frmMain.Navigate(searchUI);
+            }
         }
 
         private void btnPlan_Click(object sender, RoutedEventArgs e)
@@ -75,6 +85,13 @@ namespace GMM
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             setMenuAccess(user);
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            // Exit out of the application
+            this.Close();
+            Environment.Exit(0);
         }
     }
 }

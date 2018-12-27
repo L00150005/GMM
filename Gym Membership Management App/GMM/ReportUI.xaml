@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:GMM"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="ReportUI">
 
     <Grid>
@@ -28,53 +29,56 @@
                     <ColumnDefinition Width="20*"/>
                     <ColumnDefinition Width="20*"/>
                     <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
                 
-                <Label Grid.Column="0" Content="Facility" Width="60" Height="26"/>
-                <ComboBox Grid.Column="1" Name="cmbFacility" Width="100" Height="26" Margin="5,0,5,0"/>
-                <Label Grid.Column="2" Content="Duration" Width="60" Height="26"/>
-                <ComboBox Grid.Column="3" Name="cmbduration" Width="100" Height="26" Margin="5,0,5,0"/>
-                <Button Grid.Column="4" Name="btnGenerate" Content="Generate" Width="100" Height="26" Margin="10" />
+                <Label Grid.Column="0" Content="Plan" Width="60" Height="24"/>
+                <ComboBox Grid.Column="1" Name="cmbPlan" Width="100" Height="24" Margin="5,0,5,0"/>
+                <Button Grid.Column="2" Name="btnGeneratePlan" Content="Generate" Width="100" Height="26" Margin="10" Click="btnGeneratePlan_Click">
+                    <Button.Effect>
+                        <DropShadowEffect RenderingBias="Quality"/>
+                    </Button.Effect>
+                </Button>
             </Grid>
        </StackPanel>
 
         <StackPanel Name="stkMain" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-
-            <ListView Name="lstUsers" Grid.Row="0">
+            <ScrollViewer Grid.Row="0" Margin="10" Height="200">
+                <ListView Name="lstClients" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Gym ID" Width="150">
+                        <GridViewColumn Header="Client ID" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding clientID}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="First Name" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding firstName}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Surname" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding lastName}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Plan" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding planType}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
-
+            </ScrollViewer>
         </StackPanel>
 
     </Grid>

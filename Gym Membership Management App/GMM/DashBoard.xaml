@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GMM"
         mc:Ignorable="d"
-        WindowStyle="None"
+        WindowStyle ="None"
         WindowState="Normal"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="Manual"
         Loaded="Window_Loaded"
-        Title="DashBoard" Height="600" Width="800" MaxHeight="600" MinHeight="600" MaxWidth="800" MinWidth="800">
+        Title="DashBoard" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -20,8 +20,9 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="50*"/>
-            <ColumnDefinition Width ="50*"/>
+            <ColumnDefinition Width ="40*"/>
+            <ColumnDefinition Width ="45*"/>
+            <ColumnDefinition Width ="15*"/>
 
         </Grid.ColumnDefinitions>
 
@@ -29,18 +30,46 @@
         <Label Content="DashBoard" Grid.Column="0" Grid.Row="1" FontSize="10" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
 
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10">
-            <TextBox Name="txbSearch" Height="26" Width="100" Margin="10,0"/>
-            <Button Name="btnSearch" Height="26" Width="100" Margin="10,0" Content="Search" Click="btnSearch_Click"/>
-            <Button Name="btnReport" Height="26" Width="100" Margin="10,0" Content="Report" Click="btnReport_Click" />
+            <TextBox Name="txbSearch" Height="18" Width="100" Margin="15"/>
+            <Button Name="btnSearch" Height="26" Width="40"  Content="Go" Click="btnSearch_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
+            <Button Name="btnReport" Height="26" Width="75" Margin="25,0" Content="Report" Click="btnReport_Click" >
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
         </StackPanel>
 
-        <StackPanel Name="stkAdminButtons" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10">
-            <Button Name="btnClient" Height="26" Width="100" Margin="10,0" Content="Clients" Click="btnClient_Click" />
-            <Button Name="btnPlan" Height="26" Width="100" Margin="10,0" Content="Plans" Click="btnPlan_Click"/>
-            <Button Name="btnAdmin" Height="26" Width="100" Margin="10,0" Content="Admin" Click="btnAdmin_Click" />
+        <StackPanel Name="stkAdminButtons" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button Name="btnClient" Height="26" Width="75" Margin="10,0" Content="Clients" Click="btnClient_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
+            <Button Name="btnPlan" Height="26" Width="75" Margin="10,0" Content="Plans" Click="btnPlan_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
+            <Button Name="btnAdmin" Height="26" Width="75" Margin="10,0" Content="Admin" Click="btnAdmin_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
         </StackPanel>
 
-        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+        <StackPanel Name="stkExit" Grid.Row="2" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0">
+            <Button Name="btnExit" Height="26" Width="75" Margin="15,0" Content="Exit" Click="btnExit_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
+        </StackPanel>
+
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
             <Border BorderThickness="3" BorderBrush="Black" CornerRadius="10" Padding="4">
                 <Border.Effect>
                     <DropShadowEffect Color="Gray" Opacity="0.5" ShadowDepth="4"/>
@@ -48,5 +77,6 @@
                 <Frame Name="frmMain" NavigationUIVisibility="Hidden"/>
             </Border>
         </DockPanel>
+
     </Grid>
 </Window>

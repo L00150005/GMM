@@ -17,14 +17,13 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="25*"/>
             <ColumnDefinition Width ="50*"/>
-            <ColumnDefinition Width ="25*"/>
+            <ColumnDefinition Width ="50*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-
-            <ListView Name="lstPlans" Grid.Row="0" Height="500" SelectionChanged="lstPlans_SelectionChanged">
+            <ScrollViewer Grid.Row="0" Margin="10" Height="200">
+                <ListView Name="lstPlans" Grid.Row="0" Height="500" SelectionChanged="lstPlans_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Plan ID" Width="150">
@@ -55,13 +54,20 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn Header="Price" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding planPrice}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
-
+            </ScrollViewer>
         </StackPanel>
 
-        <StackPanel Name="stkAddEdit" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Visibility="Collapsed">
+        <StackPanel Name="stkAddEdit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  >
 
             <Grid>
 
@@ -74,26 +80,41 @@
                     <RowDefinition Height="17*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="30*"/>
 
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Plan ID" Grid.Column="0" Grid.Row="0" Width="80"  Margin="5,5,0,0"/>
-                <Label Content="Plan Name" Grid.Column="0" Grid.Row="1" Width="80"  Margin="5,5,0,0"/>
-                <Label Content="Plan Desc" Grid.Column="0" Grid.Row="2" Width="80"  Margin="5,5,0,0"/>
-                <Label Content="Price" Grid.Column="0" Grid.Row="3" Width="80"  Margin="5,5,0,0"/>
-                <Label Content="Duration" Grid.Column="0" Grid.Row="4" Width="80"  Margin="5,5,0,0"/>
-
-                <TextBox Name="txbPlanID" Grid.Column="1" Grid.Row="0" Width="200" Height="26"/>
-                <TextBox Name="txbPlanName" Grid.Column="1" Grid.Row="1" Width="200" Height="26"/>
-                <TextBox Name="txbPlanDesc" Grid.Column="1" Grid.Row="2" Width="200" Height="26"/>
-                <TextBox Name="txbPrice" Grid.Column="1" Grid.Row="3" Width="200" Height="26"/>
-                <ComboBox Name="cmbDuration" Grid.Column="1" Grid.Row="4" Width="200" Height="26"/>
+                <Label Content="Plan ID" Grid.Column="0" Grid.Row="0" Width="100"  Margin="10,10,0,0"/>
+                <Label Content="Plan Name" Grid.Column="0" Grid.Row="1" Width="100"  Margin="10,10,0,0"/>
+                <Label Content="Plan Desc" Grid.Column="0" Grid.Row="2" Width="100"  Margin="10,10,0,0"/>
+                <TextBox Name="txbPlanID" Grid.Column="1" Grid.Row="0" Width="200" Height="18" Margin="10,10,0,0" IsEnabled="False" Background="#FFB2ADAD"/>
+                <TextBox Name="txbPlanName" Grid.Column="1" Grid.Row="1" Width="200" Height="18" Margin="10,10,0,0" MaxLength="10"/>
+                <TextBox Name="txbPlanDesc" Grid.Column="1" Grid.Row="2" Width="200" Height="18" Margin="10,10,0,0"/>
+                
+                <Label Content="Price" Grid.Column="2" Grid.Row="0" Width="100"  Margin="10,10,0,0"/>
+                <Label Content="Duration" Grid.Column="2" Grid.Row="1" Width="100"  Margin="10,10,0,0"/>
+                <TextBox Name="txbPrice" Grid.Column="3" Grid.Row="0" Width="200" Height="18" Margin="10,10,0,0"/>
+                <ComboBox Name="cmbDuration" Grid.Column="3" Grid.Row="1" Width="200" Height="24" Margin="10,10,0,0" SelectionChanged="cmbDuration_SelectionChanged">
+                    <ComboBoxItem Content="Please select"/>
+                    <ComboBoxItem Content="3 Months"/>
+                    <ComboBoxItem Content="6 Months"/>
+                    <ComboBoxItem Content="12 Months"/>
+                </ComboBox>
 
                 <StackPanel Grid.Column="3" Grid.Row="6" HorizontalAlignment="Center" Orientation="Horizontal" >
-                    <Button Name="btnCancelUpdate" Content="Cancel" Width="100" Height="26" Margin="5"/>
-                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="5" Click="btnSave_Click"/>
+                    <Button Name="btnCancelUpdate" Content="Cancel" Width="100" Height="26" Margin="5" Click="btnCancelUpdate_Click">
+                        <Button.Effect>
+                            <DropShadowEffect RenderingBias="Quality"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="5" Click="btnSave_Click">
+                        <Button.Effect>
+                            <DropShadowEffect RenderingBias="Quality"/>
+                        </Button.Effect>
+                    </Button>
                 </StackPanel>
 
             </Grid>
@@ -103,9 +124,12 @@
         </StackPanel>
 
         <StackPanel Name ="stkPlanButtons" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2">
-            <Button Name="btnCancel" Content="Cancel" Width="100" Height="26" Margin="10"/>
-            <Button Name="btnEdit" Content="Edit" Width="100" Height="26" Margin="10"/>
-            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10" Click="btnAddNew_Click"/>
+           
+            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10" Click="btnAddNew_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

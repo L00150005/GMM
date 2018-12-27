@@ -14,12 +14,6 @@ namespace databaseLibrary
     
     public partial class tblClient
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblClient()
-        {
-            this.tblClientMemberships = new HashSet<tblClientMembership>();
-        }
-    
         public int clientID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -27,8 +21,7 @@ namespace databaseLibrary
         public string address1 { get; set; }
         public string address2 { get; set; }
         public string phoneNo { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblClientMembership> tblClientMemberships { get; set; }
+        public string Sex { get; set; }
+        public string planType { get; set; }
     }
 }

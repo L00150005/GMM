@@ -11,9 +11,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="36*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -22,42 +22,50 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Name="stkMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-
-                <ListView Name="lstUsers" Grid.Row="0" Height="500" SelectionChanged="lstUsers_SelectionChanged">
+            <ScrollViewer Grid.Row="0" Margin="10" Height="200">
+                <ListView Name="lstUsers" Grid.Row="0" Height="500" SelectionChanged="lstUsers_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="User ID" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userID}"/>
+                                        <TextBlock HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="{Binding userID}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="UserName" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userName}"/>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userName}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Password" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userPassword}"/>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userPassword}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userFullname}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Security Level" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userSecurityLevel}"/>
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding userSecurityLevel}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
-            
+
+            </ScrollViewer>
         </StackPanel>
 
         <StackPanel Name="stkAddEdit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed">
@@ -81,18 +89,35 @@
                 <Label Content="User ID" Grid.Column="0" Grid.Row="0" Width="100"  Margin="10,10,0,0"/>
                 <Label Content="UserName" Grid.Column="0" Grid.Row="1" Width="100"  Margin="10,10,0,0"/>
                 <Label Content="Name" Grid.Column="0" Grid.Row="2" Width="100"  Margin="10,10,0,0"/>
-                <TextBox Name="txbUserID" Grid.Column="1" Grid.Row="0" Width="200" Height="26"/>
-                <TextBox Name="txbUserName" Grid.Column="1" Grid.Row="1" Width="200" Height="26"/>
-                <TextBox Name="txbName" Grid.Column="1" Grid.Row="2" Width="200" Height="26"/>
+                <TextBox Name="txbUserID" Grid.Column="1" Grid.Row="0" Width="200" Height="18" IsEnabled="False" Background="#FFB2ADAD"/>
+                <TextBox Name="txbUserName" Grid.Column="1" Grid.Row="1" Width="200" Height="18"/>
+                <TextBox Name="txbName" Grid.Column="1" Grid.Row="2" Width="200" Height="18"/>
 
                 <Label Content="Password" Grid.Column="2" Grid.Row="1" Width="100"  Margin="10,10,0,0"/>
                 <Label Content="Security Level" Grid.Column="2" Grid.Row="2" Width="100"  Margin="10,10,0,0"/>
-                <TextBox Name="txbPassword" Grid.Column="3" Grid.Row="1" Width="200" Height="26"/>
-                <TextBox Name="txbSecurity" Grid.Column="3" Grid.Row="2" Width="200" Height="26"/>
+                <TextBox Name="txbPassword" Grid.Column="3" Grid.Row="1" Width="200" Height="18"/>
+                <ComboBox Name="cboSecurity" Grid.Column="3" Grid.Row="2" Width="200" Height="24" SelectionChanged="cboSecurity_SelectionChanged">
+                    <ComboBoxItem Content="Please select"/>
+                    <ComboBoxItem Content="Administrator"/>
+                    <ComboBoxItem Content="Read-Only"/>
+                </ComboBox>
 
-                <StackPanel Grid.Column="3" Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal" >
-                    <Button Name="btnCancelUpdate" Content="Cancel" Width="100" Height="26" Margin="10" Click="btnCancelUpdate_Click"/>
-                    <Button Name="btnSave" Content="Save" Width="100" Height="26" Margin="10" Click="btnSave_Click"/>
+                <StackPanel Grid.Column="3" Grid.Row="5" HorizontalAlignment="Right" Orientation="Horizontal" >
+                    <Button Name="btnCancelUpdate" Content="Cancel" Width="50" Height="26" Margin="10" Click="btnCancelUpdate_Click">
+                        <Button.Effect>
+                            <DropShadowEffect RenderingBias="Quality"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button Name="btnDelete" Content="Delete" Width="50" Height="26" Margin="10" Click="btnDelete_Click">
+                        <Button.Effect>
+                            <DropShadowEffect RenderingBias="Quality"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button Name="btnSave" Content="Save" Width="50" Height="26" Margin="10" Click="btnSave_Click">
+                        <Button.Effect>
+                            <DropShadowEffect RenderingBias="Quality"/>
+                        </Button.Effect>
+                    </Button>
                 </StackPanel>
 
             </Grid>
@@ -102,9 +127,12 @@
         </StackPanel>
 
         <StackPanel Name ="stkUserButtons" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="btnCancel" Content="Cancel" Width="100" Height="26" Margin="10"/>
-            <Button Name="btnEdit" Content="Edit" Width="100" Height="26" Margin="10"/>
-            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10" Click="btnAddNew_Click"/>
+           
+            <Button Name="btnAddNew" Content="Add New" Width="100" Height="26" Margin="10" Click="btnAddNew_Click">
+                <Button.Effect>
+                    <DropShadowEffect RenderingBias="Quality"/>
+                </Button.Effect>
+            </Button>
         </StackPanel>
 
     </Grid>

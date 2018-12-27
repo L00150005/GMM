@@ -44,12 +44,13 @@ namespace GMM
                 if (validatedUser.userID > 0)
                 {
                     // Create a new instance of the dashboard screen and pass the validatedUser object to it.
+                    this.Hide();
                     DashBoard dashBoard = new DashBoard();
                     dashBoard.Owner = this;
                     dashBoard.user = validatedUser;
                     dashBoard.ShowDialog();
-                    this.Hide();
-
+                    
+                    
                 }
                 else
                 {
@@ -91,13 +92,13 @@ namespace GMM
                 }
 
             }
-           catch(EntityException ex)
+           catch(EntityException)
             {
                 MessageBox.Show("Unable to connect to the database, please try again later.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 // Exit out of the application, if unable to connect to the database
                 this.Close();
                 Environment.Exit(0);
-                throw;
+ 
                 
             }
 

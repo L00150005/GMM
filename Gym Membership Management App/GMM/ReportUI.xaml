@@ -39,6 +39,7 @@
                         <DropShadowEffect RenderingBias="Quality"/>
                     </Button.Effect>
                 </Button>
+                <Label Name="lblCount" Grid.Column="3" Width="140" Height="24" Margin="10"/>
             </Grid>
        </StackPanel>
 

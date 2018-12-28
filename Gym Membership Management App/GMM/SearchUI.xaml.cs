@@ -37,7 +37,15 @@ namespace GMM
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             searchForClient();
-            populateControls();
+            // Check that a client was found in the Client table
+            if (clientFound.clientID > 0)
+            {
+                populateControls();
+            }
+            else
+            {
+                MessageBox.Show("No matching Client found for:" + searchClient, "Client Search", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void searchForClient()

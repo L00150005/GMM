@@ -50,15 +50,23 @@ namespace GMM
         {
             if (txbSearch.Text == "")
             {
-                MessageBox.Show("Please enter a Client number", "Search", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please enter a Client number", "Client Search", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
                 // If a user inputs a client number, create a new instance of the Search screen
                 // and pass the client number to this new object.
                 SearchUI searchUI = new SearchUI();
-                searchUI.searchClient = int.Parse(txbSearch.Text);
-                frmMain.Navigate(searchUI);
+                try
+                {
+                    searchUI.searchClient = int.Parse(txbSearch.Text);
+                    frmMain.Navigate(searchUI);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Client Search", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
             }
         }
 

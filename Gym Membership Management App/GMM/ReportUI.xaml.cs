@@ -28,6 +28,9 @@ namespace GMM
 
         List<tblClient> clients = new List<tblClient>();
 
+        // Holds the number of Clients returned
+        int numClients = 0;
+
         public ReportUI()
         {
             InitializeComponent();
@@ -54,6 +57,7 @@ namespace GMM
             {
                 clients.Add(client);
             }
+            numClients = clients.Count;
 
             lstClients.ItemsSource = clients;
             lstClients.Items.Refresh();
@@ -64,6 +68,7 @@ namespace GMM
         private void btnGeneratePlan_Click(object sender, RoutedEventArgs e)
         {
             refreshPlanList();
+            lblCount.Content =  "Number of clients: " + numClients;
         }
     }
 }

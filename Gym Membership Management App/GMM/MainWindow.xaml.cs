@@ -25,6 +25,8 @@ namespace GMM
         // Create the connection to the database.
         databaseLibrary.theGymDBEntities db = new databaseLibrary.theGymDBEntities("metadata=res://*/GymManagementModel.csdl|res://*/GymManagementModel.ssdl|res://*/GymManagementModel.msl;provider=System.Data.SqlClient;provider connection string = 'data source=192.168.0.184;initial catalog=theGymDB;user id = bcl; password = Galway95; pooling=False;MultipleActiveResultSets=True;App=EntityFramework'");
 
+        LoginProcess loginProcess = new LoginProcess();
+
         private tblUser validatedUser = new tblUser();
 
         public MainWindow()
@@ -37,7 +39,7 @@ namespace GMM
             string strUser = tbxUsername.Text;
             string strPassword = tbxPassword.Password;
 
-            if (blnValidateUserInput(strUser, strPassword))
+            if (loginProcess.blnValidateUserInput(strUser, strPassword))
             {
                 GetUserData(strUser, strPassword);
 
@@ -64,15 +66,7 @@ namespace GMM
             }
         }
 
-        private Boolean blnValidateUserInput(string strUserID, string strPassword)
-        {
-            // Validate that the user has input both a username and password
-            if (strUserID == "" || strPassword == "")
-            {
-                return false;
-            }
-            return true;
-        }
+    
 
         private void GetUserData(string strUserID, string strPassword)
         {
